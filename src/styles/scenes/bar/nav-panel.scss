@@ -1,0 +1,94 @@
+.nav-panel {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 80%;
+    height: 90%;
+    transform: translate(-50%, 0);
+    border: 2px solid lightgray;
+    border-width: 0 15px 8px 3px;
+    background: #111;
+    z-index: 50;
+    border-bottom-left-radius: 100px;
+    border-bottom-right-radius: 100px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    cursor: default;
+    transition: transform 0.5s ease-in-out;
+    box-shadow: inset 0 0 20px lightgrey, 0 0 20px lightgrey;
+    overflow: hidden;
+
+    &.hide {
+        transform: translate(-50%, -100%);
+    }
+
+    .stars {
+        animation: none !important;
+    }
+
+    .level {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: 100%;
+
+        .marker {
+            width: 5%;
+            padding-bottom: 5%;
+            background: #fff;
+            cursor: pointer;
+        }
+    }
+
+    .bar-wrap-wrap {
+        left: 15%;
+        top: 50%;
+        transform: translate(-50%, -150%) scaleX(-1);
+        width: 10%;
+    }
+
+    .planet {
+        width: 20%;
+        padding-bottom: 20%;
+        border-radius: 100%;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, 50%);
+        background: rgb(109, 39, 39);
+    }
+
+    &.level-0 .planet {
+
+    }
+
+    .level-1 .planet {
+        background: rgb(87, 60, 112);
+        width: 30%;
+        padding-bottom: 30%;
+    }
+
+    .level-2 .planet {
+        background: rgb(64, 109, 68);
+        width: 15%;
+        padding-bottom: 15%;
+    }
+}
+
+.scrim {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: #111;
+    opacity: 0.8;
+    z-index: 49;
+
+    &.hide {
+        opacity: 0;
+        pointer-events: none;
+    }
+}

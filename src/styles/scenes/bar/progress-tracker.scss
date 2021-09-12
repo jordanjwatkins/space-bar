@@ -1,0 +1,21 @@
+.progress-tracker {
+    display: flex;
+    justify-content: flex-start;
+    width: 60%;
+    height: 5%;
+    border: 1px solid lightgray;
+    position: absolute;
+    bottom: 2%;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 20px;
+    align-items: center;
+
+    .pip {
+        background-color: #222;
+        border-radius: 100%;
+        height: 80%;
+        margin: 15px;
+        aspect-ratio: 1 / 1;
+    }
+}

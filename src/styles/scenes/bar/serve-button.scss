@@ -1,0 +1,58 @@
+.serve-button {
+    //--translate: translate(-200px, -50%);
+    --translate: translate(0, -50%);
+    position: absolute;
+    //top: 50%;
+    bottom: 6%;
+    left: 50%;
+    /*width: 200px;
+    height: 200px;*/
+    transform: var(--translate);
+    transition: transform 0.3s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+
+    &.enabled:not(.active) {
+        animation: pulse 1.3s infinite linear;
+    }
+
+    &:before,
+    &:after {
+        content: '⬢';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        color: black;
+        font-size: 6vw;
+        transform: translate(-50%, -50%);
+    }
+
+    &:before {
+        color: #fff;
+        font-size: 7vw;
+        top: 49%;
+    }
+
+    div {
+        color: #fff;
+        font-size: 2vw;
+        z-index: 4;
+        position: relative;
+        top: 2%;
+    }
+
+    &.active{
+        transform: var(--translate) scale(1.3);
+
+        &:after {
+            color: blue;
+        }
+    }
+}
+
+@keyframes pulse {
+    50% { transform: var(--translate) scale(1.2); }
+}

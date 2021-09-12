@@ -1,0 +1,53 @@
+.ingredients-panel {
+    position: absolute;
+    top: 58%;
+    left: 20%;
+    transform: translate(-50%, -50%);
+    height: 57%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    border: 1px solid #fff;
+    color: #fff;
+    font-size: 5vh;
+    border-radius: 4vw;
+    padding: 1% 1% 7.5%;
+    background-color: #55506d;
+    overflow: hidden;
+    z-index: 3;
+    aspect-ratio: 1/2;
+    max-width: 25%;
+
+    &:after {
+        content: '';
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        bottom: 0;
+        left: 0;
+        background-image: linear-gradient(0deg, red 2%, transparent 2%);
+        background-position: 0 0;
+        z-index: 3;
+        opacity: 0.2;
+        animation: beam2 0.7s infinite linear;
+        mix-blend-mode: color-burn;
+        pointer-events: none;
+    }
+
+    .ingredient {
+        border: 1px solid #fff;
+        width: 50px;
+        height: 50px;
+        display: flex;
+        width: 100%;
+        height: 20%;
+        border-radius: 1000px;
+        align-items: center;
+        justify-content: flex-end;
+        cursor: pointer;
+        padding: 0 20px;
+        line-height: 0;
+        background-color: #000;
+    }
+}

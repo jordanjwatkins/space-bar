@@ -1,0 +1,185 @@
+.window {
+    border: 2px solid lightgray;
+    border-radius: 30px;
+    position: absolute;
+    top: 6%;
+    left: 6%;
+    width: 24%;
+    height: 18%;
+    overflow: hidden;
+
+    background-image:
+    radial-gradient(2px 2px at 20px 30px, #eee, rgba(0,0,0,0)),
+    radial-gradient(2px 2px at 40px 70px, #fff, rgba(0,0,0,0)),
+    radial-gradient(2px 2px at 50px 160px, #ddd, rgba(0,0,0,0)),
+    radial-gradient(2px 2px at 90px 40px, #fff, rgba(0,0,0,0)),
+    radial-gradient(2px 2px at 130px 80px, #fff, rgba(0,0,0,0)),
+    radial-gradient(2px 2px at 160px 120px, #ddd, rgba(0,0,0,0));
+    background-repeat: repeat;
+    background-size: 100px 100px;
+
+    .star {
+        background: #fff;
+        width: 2px;
+        height: 2px;
+    }
+}
+
+.alien {
+    transform: translate(-650%, 0);
+
+    &.in {
+        transition: transform 0.4s ease-in;
+        transform: translate(-50%, -50%);
+    }
+
+    &.out {
+        transition: transform 0.4s ease-in;
+        transform: translate(650%, 0);
+    }
+}
+
+.alien-1 {
+    position: absolute;
+    left: 50%;
+    bottom: -30px;
+    width: 50px;
+    height: 130px;
+
+    border-radius: 100%;
+    background: greenyellow;
+
+    [class^=eye] {
+        background: #fff;
+        border-radius: 100%;
+        width: 30px;
+        height: 30px;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+
+        &:before {
+            content: '';
+            background: lightblue;
+            border-radius: 100%;
+            width: 5px;
+            height: 7px;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+        }
+    }
+
+    .eye-2 {
+        transform: translate(-50%, -160%);
+    }
+
+    /* mouth */
+    &:after {
+        content: '';
+        width: 20px;
+        height: 2px;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, 20px);
+        background-color: darkgreen;
+    }
+
+    .part-1 {
+        width: 20px;
+        height: 120px;
+        position: absolute;
+        right: -40px;
+        bottom: -30px;
+        border-radius: 50%;
+        transform: translate(-50%, 20px);
+        background-color: greenyellow;
+
+        &:after,
+        &:before {
+            content: '';
+            width: 10px;
+            height: 10px;
+            position: absolute;
+            left: 50%;
+            top: 7%;
+            transform: translate(-50%, 20px);
+            background-color: rgb(87, 110, 51);
+            border-radius: 100%;
+            border: 2px solid rgb(52, 92, 52);
+        }
+
+        &:before {
+            width: 10px;
+            height: 10px;
+            top: -3%;
+        }
+    }
+}
+
+.alien-2 {
+    position: absolute;
+    top: 55%;
+    left: 50%;
+    height: 50%;
+    aspect-ratio: 1/2;
+    transform: translate(-650%, -50%);
+
+    &:before {
+        content: '';
+        background: silver;
+        border-radius: 100%;
+        position: absolute;
+        top: -2%;
+        left: 50%;
+        width: 150%;
+        aspect-ratio: 1/1;
+        transform: translate(-50%, 0);
+        border-radius: 100%;
+        opacity: 0.4;
+    }
+
+    &:after {
+        content: '';
+        background: radial-gradient(ellipse, silver, #111);
+        background: radial-gradient(ellipse, rgba(102, 75, 75,0.3), #111), linear-gradient(0deg, silver 50%, #999 50%);
+        background-position: 25% 25%;
+        border-radius: 100%;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 300%;
+        aspect-ratio: 1/0.3;
+        transform: translate(-50%, -50%);
+        z-index: 10;
+    }
+
+    .part-1 {
+        content: '';
+        background: purple;
+        border-radius: 100%;
+        position: absolute;
+        top: 1%;
+        left: 50%;
+        width: 100%;
+        aspect-ratio: 1/1;
+        transform: translate(-50%, 0);
+        border-radius: 100%;
+        z-index: -11;
+    }
+
+    .eye-1 {
+        background: #fff;
+        border-radius: 100%;
+        width: 20%;
+        aspect-ratio: 1/1;
+        position: absolute;
+        left: 50%;
+        top: 15%;
+        transform: translate(-50%, -50%);
+        z-index: 50;
+    }
+}

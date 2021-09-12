@@ -1,0 +1,49 @@
+.alert-light {
+    color: #fff;
+    font-size: 30px;
+    position: absolute;
+    top: 10%;
+    left: 70%;
+    transform: translate(-50%, -50%);
+
+    > div {
+        z-index: 2;
+    }
+
+    &:before,
+    &:after {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        border: 50px solid #fff;
+        border-right-color: transparent;
+        border-left-color: transparent;
+        border-bottom-width: 0;
+        border-radius: 25px;
+
+    }
+
+    &:after {
+        border: 45px solid #000;
+        border-right-color: transparent;
+        border-left-color: transparent;
+        border-bottom-width: 0;
+
+    }
+
+    &.active:after {
+        animation: alert-blink .5s linear infinite;
+    }
+
+    @keyframes alert-blink {
+        30% {
+            border-top-color: red;
+        }
+
+        50% {
+            border-top-color: red;
+        }
+    }
+}

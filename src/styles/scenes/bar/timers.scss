@@ -1,0 +1,74 @@
+.drink-timer,
+.explosion-timer {
+    width: 2%;
+    height: 20%;
+    position: absolute;
+    border: 1px solid lightgray;
+    border-right-width: 0;
+    border-top-width: 9px;
+    border-bottom-width: 4px;
+    border-top-left-radius: 100px;
+    border-bottom-left-radius: 100px;
+    transition: height 0.3s linear;
+
+    &:before,
+    &:after {
+        content: '';
+        position: absolute;
+        width: 200%;
+        height: 100%;
+        background: red;
+        left: 0;
+        top: 0;
+        border: 9px solid transparent;
+        background-clip: content-box;
+        border-radius: 100px;
+    }
+
+    &:after {
+        background: #111;
+        background-clip: content-box;
+        border-radius: 0;
+        height: 0;
+        opacity: 0.9;
+    }
+
+    &.count-down:after {
+        height: 100%;
+        transform-origin: bottom center;
+        transition: height 11.3s linear;
+    }
+}
+
+.drink-timer {
+    left: 80%;
+    top: 14%;
+
+    &:before {
+        background: linear-gradient(0deg, red 33%, yellow 33%, yellow 66%, green 66%);
+        background-clip: content-box;
+    }
+
+    &:after {
+        height: 100%;
+    }
+
+    &.count-down:after {
+        height: 0;
+        transition: height 4s linear;
+    }
+}
+
+.explosion-timer {
+    left: 69%;
+    top: 14%;
+
+    &:after {
+        height: 100%;
+    }
+
+    &.count-down:after {
+        height: 0;
+        transition: height 4s linear;
+    }
+}
