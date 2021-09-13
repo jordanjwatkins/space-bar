@@ -32,7 +32,37 @@
         justify-content: center;
         align-items: center;
         width: 100%;
-        height: 100%;
+        height: 75%;
+        top: -12%;
+        border: 2px solid transparent;
+        cursor: pointer;
+
+        &.blink {
+            border: 2px solid green;
+            background: rgba(11, 182, 68, 0.35);
+            animation: start-blink 0.3s infinite;
+        }
+
+        &.locked {
+            background: rgba(249, 0, 0, 0.35);
+            border: 2px solid red;
+
+            &.blink {
+                animation: locked-blink 0.3s infinite;
+            }
+        }
+
+        @keyframes locked-blink {
+            50% {
+                background: rgba(249, 0, 0, 0.55);
+            }
+        }
+
+        @keyframes start-blink {
+            50% {
+                background: rgba(11, 182, 68, 0.55);
+            }
+        }
 
         .marker {
             width: 5%;
@@ -43,37 +73,166 @@
     }
 
     .bar-wrap-wrap {
-        left: 15%;
-        top: 50%;
+        left: 13%;
+        top: 31%;
         transform: translate(-50%, -150%) scaleX(-1);
         width: 10%;
+        padding-bottom: 5%;
+        height: 0;
+        z-index: 100;
+        transition: left 0.5s ease-in-out;
     }
 
     .planet {
-        width: 20%;
-        padding-bottom: 20%;
+        width: 17vmin;
+        padding-bottom: 17vmin;
         border-radius: 100%;
         position: absolute;
-        top: 50%;
+        top: 80%;
         left: 50%;
-        transform: translate(-50%, 50%);
+        transform: translate(-50%, -50%);
         background: rgb(109, 39, 39);
+
+        &:before,
+        &:after {
+            content: "";
+            position: absolute;
+            left: 24%;
+            top: 10%;
+            width: 20%;
+            padding-bottom: 20%;
+            border-radius: 100%;
+            opacity: 0.7;
+        }
     }
 
-    &.level-0 .planet {
+    .level-0 .planet {
+        background-image: radial-gradient(circle at 20px 0px, rgba(250, 0, 0, 0.2), rgba(0, 0, 0, 0.7));
 
+        &:before {
+            background: #000;
+            opacity: 0.2;
+        }
     }
 
     .level-1 .planet {
         background: rgb(87, 60, 112);
-        width: 30%;
-        padding-bottom: 30%;
+        width: 22vmin;
+        padding-bottom: 22vmin;
+        transform: translate(-50%, -50%);
+
+        &:before,
+        &:after {
+            background-image: linear-gradient(0deg, transparent 50%, rgba(0, 0, 0, 0.05) 50%);
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            transform: rotate(45deg);
+            opacity: 1;
+            background-size: 100% 20%;
+        }
+
+        &:after {
+            background-image: radial-gradient(circle at 20px 0px, rgba(250, 0, 0, 0.2), rgba(0, 0, 0, 0.7));
+            background-size: 100% 100%;
+        }
     }
 
     .level-2 .planet {
         background: rgb(64, 109, 68);
-        width: 15%;
-        padding-bottom: 15%;
+        width: 12vmin;
+        padding-bottom: 12vmin;
+        background-image: radial-gradient(circle at 20px 0px, rgba(250, 0, 0, 0.2), rgba(0, 0, 0, 0.7));
+    }
+
+    .level-3 .planet {
+        background: #222;
+        /*width: 50%;
+        padding-bottom: 50%;*/
+
+        width: 20vmin;
+        padding-bottom: 20vmin;
+
+        background-image: radial-gradient(circle at 20px 0px, rgba(250, 0, 0, 0.2), rgba(0, 0, 0, 1));
+
+        &:before,
+        &:after {
+            content: "";
+            position: absolute;
+            left: 24%;
+            top: 10%;
+            width: 20%;
+            padding-bottom: 20%;
+            background-color: red;
+            background-image: radial-gradient(circle, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0));
+            border-radius: 100%;
+            opacity: 0.7;
+        }
+
+        &:after {
+            left: 44%;
+            top: 40%;
+            width: 40%;
+            padding-bottom: 40%;
+        }
+    }
+
+
+
+    .total-progress {
+        width: 50vw;
+        height: 8vh;
+        max-height: 35px;
+        position: absolute;
+        bottom: 5%;
+        border: 1px solid lightgray;
+        border-right-width: 19px;
+        border-top-width: 0;
+        border-bottom-width: 8px;
+        border-bottom-right-radius: 100px;
+        border-bottom-left-radius: 80px;
+        transition: height 0.3s linear;
+
+        .milestone {
+            position: absolute;
+            width: 2px;
+            height: 100%;
+            background: lightgray;
+            z-index: 10;
+        }
+
+        &:before,
+        &:after {
+            content: "";
+            position: absolute;
+            width: 96%;
+            height: 150%;
+            max-height: 40px;
+            background: green;
+            right: 2%;
+            transform: translate(0%, -50%);
+            top: 0;
+            /*border: 14px solid transparent;
+            border-bottom-width: 14px;*/
+            background-clip: content-box;
+            border-radius: 100px;
+        }
+
+        &:after {
+            background: #111;
+            background-clip: content-box;
+            border-radius: 0;
+            width: calc(96% - var(--total-progress));
+            opacity: 0.9;
+            transition: width 1s linear;
+            left: auto;
+        }
+
+        &.count-down:after {
+            width: 0;
+            transform-origin: bottom center;
+        }
     }
 }
 
@@ -90,5 +249,77 @@
     &.hide {
         opacity: 0;
         pointer-events: none;
+    }
+}
+
+.boss {
+    position: absolute;
+    right: 1%;
+    top: 40%;
+    border: 1px solid rgba(142, 61, 248, 0.2);
+    background: rgba(113, 4, 255, 0.582);
+    border-radius: 100%;
+    width: 15vmin;
+    height: 15vmin;
+    z-index: 400;
+    opacity: 0;
+    cursor: pointer;
+
+    &.unlocked {
+        transition: opacity 0.7s;
+        opacity: 1;
+    }
+
+    &:before,
+    &:after,
+    .part:before {
+        content: '';
+        position: absolute;
+        background: red;
+        width: 12%;
+        height: 4%;
+        left: 58%;
+        top: 40%;
+        z-index: 5;
+        transform: translateX(-50%);
+    }
+
+    &:after {
+        left: 42%;
+    }
+
+    .part {
+        background: #222;
+        width: 20%;
+        padding-bottom: 20%;
+        border-radius: 100%;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+
+        &:before {
+            width: 50%;
+            top: 70%;
+            left: 50%;
+            height: 7%;
+        }
+    }
+
+    .part-1 {
+        left: 50%;
+        top: 50%;
+        width: 40%;
+        padding-bottom: 40%;
+    }
+
+    .part-2 {
+        top: 52%;
+        left: 24%;
+    }
+
+    .part-3 {
+        top: 52%;
+        left: 76%;
     }
 }

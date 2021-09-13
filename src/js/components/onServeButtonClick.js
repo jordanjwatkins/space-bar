@@ -1,11 +1,15 @@
 function onServeButtonClick() {
+  if (!this.canClick) return;
+
+  this.canClick = false;
   this.elServeButton.classList.add('active');
 
   const result = this.checkGlass();
 
-  this.sounds.buttonPress();
+  this.sounds.buttonPress(600);
 
   setTimeout(() => {
+    this.elIngredientsPanel.classList.add('disabled');
     this.elServeButton.classList.remove('active');
     this.elServeButton.classList.remove('enabled');
   }, 300);
@@ -34,7 +38,7 @@ function onServeButtonClick() {
       this.order = { text: '' };
     }*/
 
-    result();
+    if (result) result();
   }, 1000);
 
   setTimeout(() => {

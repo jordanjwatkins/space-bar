@@ -76,86 +76,13 @@ class Game {
   constructor(sounds) {
     this.ingredientColors = ingredientColors;
     this.exploders = exploders;
-    //this.orders = [...orders ];
+    this.orders = [];
     this.mixes = mixes;
     Object.assign(this, addToGlass);
     Object.assign(this, checkGlass);
     this.sounds = sounds;
     this.onIngredientClick = onIngredientClick;
     this.onServeButtonClick = onServeButtonClick;
-
-    const elTitleScreen = dom.findOne('.title-screen-container');
-
-    this.elTitleScreen = elTitleScreen;
-
-    this.elAlien = dom.findOne('.alien');
-
-    // Skip title
-    if (false) {
-      elTitleScreen.style.display = 'none';
-
-      setTimeout(() => {
-        this.elAlien.classList.add('in');
-      }, 100);
-    }
-
-      /*dom.on(elTitleScreen, 'click', () => {
-        dom.findOne('.mouth').classList.toggle('flipped');
-
-        setTimeout(() => {
-
-          dom.findOne('.explosion-minis').classList.toggle('boom');
-          knote.brownNoise(0, 1400, 0.54);
-          //knote.brownNoise(500, 700, 0.55);
-          knote.brownNoise(0.3, 1400, 0.55);
-          knote.brownNoise(0.5, 1400, 0.55);
-          setTimeout(() => {
-            //knote.brownNoise(0, 1500, 1);
-          }, 500);
-          setTimeout(() => {
-            //knote.brownNoise(0, 1500, 1);
-          }, 600);
-
-          setTimeout(() => {
-
-            dom.findOne('.explosion').classList.toggle('boom');
-            //knote.brownNoise(0, 1900, 1);
-            knote.brownNoise(0, 2900, 0.5);
-          }, 1000);
-        }, 500);
-
-      });*/
-
-    this.canClick = true;
-
-    /*dom.on(elTitleScreen, 'touchend', () => {
-      if (!this.canClick) return;
-
-      if (elTitleScreen.requestFullscreen) {
-        console.log('go full!');
-        document.body.requestFullscreen();
-      }
-    }, { once: true });*/
-
-    dom.onTap(elTitleScreen, () => {
-      if (!this.canClick) return;
-
-      elTitleScreen.classList.add('enter');
-
-      setTimeout(() => {
-        elTitleScreen.classList.add('hide');
-
-        setTimeout(() => {
-          this.navPanel.toggle();
-        }, 1000);
-
-        /*setTimeout(() => {
-          this.elAlien.classList.add('in');
-        }, 100);*/
-      }, 4000);
-    });
-
-    // document.querySelector('.title-screen-container').addEventListener('click', event => event.currentTarget.classList.add('hide'));
 
     this.elIngredientsPanel = dom.findOne('.ingredients-panel');
     this.elIngredients = dom.find('.ingredient', this.elIngredientsPanel);
@@ -174,8 +101,62 @@ class Game {
     this.elGameOver = dom.findOne('.game-over');
     this.elMouth = dom.findOne('.mouth');
     this.elBarWrapWrap = dom.findOne('.bar-wrap-wrap');
+    this.elWindow = dom.findOne('.window');
 
     this.navPanel = new NavPanel(this);
+
+    const elTitleScreen = dom.findOne('.title-screen-container');
+
+    this.elTitleScreen = elTitleScreen;
+
+    this.elAlien = dom.findOne('.alien');
+
+    // Skip title
+    if (false) {
+      elTitleScreen.style.display = 'none';
+
+      //setTimeout(() => {
+        //this.elAlien.classList.add('in');
+      //}, 100);
+
+      this.navPanel.toggle();
+    }
+
+    this.canClick = true;
+
+    /*dom.on(elTitleScreen, 'touchend', () => {
+      if (!this.canClick) return;
+
+      if (elTitleScreen.requestFullscreen) {
+        console.log('go full!');
+        document.body.requestFullscreen();
+      }
+    }, { once: true });*/
+
+    dom.onTap(elTitleScreen, () => {
+      //console.log('title screen click', this.canClick);
+      if (!this.canClick) return;
+
+      this.canClick = false;
+
+      elTitleScreen.classList.add('enter');
+
+      setTimeout(() => {
+        elTitleScreen.classList.add('hide');
+
+        setTimeout(() => {
+          this.navPanel.toggle();
+
+          this.canClick = true;
+        }, 500);
+
+        /*setTimeout(() => {
+          this.elAlien.classList.add('in');
+        }, 100);*/
+      }, 4000);
+    });
+
+    // document.querySelector('.title-screen-container').addEventListener('click', event => event.currentTarget.classList.add('hide'));
 
     //this.order = this.orders.shift();
     this.glassContents = [];
@@ -187,10 +168,11 @@ class Game {
     //this.elOrderPanel.innerHTML = `<div>${orderText}</div>`;
     this.liquidLevel = 0;
 
-    dom.on(this.elIngredients, 'click', (event) => this.onIngredientClick(event));
-    dom.on(this.elServeButton, 'click', (event) => this.onServeButtonClick(event));
+    dom.onTap(this.elIngredients, (event) => this.onIngredientClick(event));
+    dom.onTap(this.elServeButton, (event) => this.onServeButtonClick(event));
 
-    dom.on(this.elGameOver, 'click', (event) => {
+    dom.onTap(this.elGameOver, (event) => {
+      console.log('game over reset');
       event.stopImmediatePropagation();
 
       // soft reset
@@ -204,6 +186,8 @@ class Game {
 
       //this.orders = [...orders];
       //this.order = this.orders.shift();
+
+      console.log('reset glass');
 
       this.resetGlass();
 

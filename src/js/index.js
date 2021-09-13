@@ -1,11 +1,34 @@
 import Game from './components/Game';
+import dom from './libs/dom';
 import knote from './libs/knote';
 
 let alertRepeater;
 
 const sounds = {
+  win() {
+    knote.randomSlide(700, 800, 0.2, 0.4, 'triangle');
+
+    setTimeout(() => {
+      // knote.randomSlide(750, 850, 0.2, 0.4, 'triangle');
+      knote.randomSlide(950, 1050, 0.2, 0.4, 'triangle');
+
+      setTimeout(() => {
+        knote.randomSlide(650, 750, 0.3, 0.4, 'triangle');
+
+        setTimeout(() => {
+          // knote.randomSlide(950, 1050, 0.2, 0.4, 'triangle');
+          knote.randomSlide(1150, 1250, 0.3, 0.4, 'triangle');
+
+          setTimeout(() => {
+            knote.randomSlide(1450, 1450, 0.8, 0.4, 'triangle');
+          }, 340);
+        }, 240);
+      }, 280);
+    }, 240);
+  },
+
   buttonPress(shift = 100) {
-    //const shift = Math.random() * 600;
+    // const shift = Math.random() * 600;
 
     knote.randomSlide(700 + shift, 790 + shift, 0.2, 0.4, 'triangle');
   },
@@ -53,28 +76,29 @@ const sounds = {
   }
 };
 
-const game = new Game(sounds);
+const game = new Game(sounds); // eslint-disable-line
 
-document.addEventListener('click', () => {
-  /*setInterval(() => {
+dom.onTap(dom.findOne('.app-container'), () => {
+  // console.log('start background sound');
+  // sounds.win()
+  /* setInterval(() => {
 
     knote.randomSlide(500, 800, 0.5, 0.4, 'triangle');
-  }, 700);*/
+  }, 700); */
 
-  slideForever2()
-  slideForever()
+  slideForever2();
+  slideForever();
 }, { once: true });
 
-let ab = true;
+// const ab = true;
 
-document.addEventListener('click', () => {
-  return false;
-  const status = 'success';
-  //const status = 'fail';
+/* document.addEventListener('click', () => false,
+ const status = 'success';
+  // const status = 'fail';
 
   if (status === 'fail') {
-    //const waveType = 'sawtooth';
-    //const waveType = 'triangle';
+    // const waveType = 'sawtooth';
+    // const waveType = 'triangle';
 
     const waveType = (ab) ?
       'sawtooth' :
@@ -87,8 +111,6 @@ document.addEventListener('click', () => {
     }, 140);
 
     ab = !ab;
-
-    return;
   }
 
   knote.randomSlide(700, 800, 0.1, 0.4, 'triangle');
@@ -96,22 +118,23 @@ document.addEventListener('click', () => {
   setTimeout(() => {
     knote.randomSlide(800, 1300, 0.2, 0.4, 'triangle');
   }, 140);
-}, { });
+  {}); */
 
 function slideForever() {
   knote.randomSlide();
   setTimeout(() => {
-    slideForever()
+    slideForever();
   }, 900 + 500 * Math.random());
-
 }
 
 function slideForever2() {
-  (Math.random() > 0.5 ) ?
-    knote.randomSlide(400, 500, 2) :
+  if (Math.random() > 0.5) {
+    knote.randomSlide(400, 500, 2);
+  } else {
     knote.randomSlide(300, 400, 2);
+  }
 
   setTimeout(() => {
-    slideForever2()
+    slideForever2();
   }, 2000);
 }

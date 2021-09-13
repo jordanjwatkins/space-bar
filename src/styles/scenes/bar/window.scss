@@ -7,6 +7,7 @@
     width: 24%;
     height: 18%;
     overflow: hidden;
+    transform: translate3d(0,0,0);
 
     background-image:
     radial-gradient(2px 2px at 20px 30px, #eee, rgba(0,0,0,0)),
@@ -22,6 +23,67 @@
         background: #fff;
         width: 2px;
         height: 2px;
+    }
+
+    .boss {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        border: 1px solid rgba(142, 61, 248, 0.2);
+        background: rgba(113, 4, 255, 0.582);
+        border-radius: 100%;
+        width: 80%;
+        padding-bottom: 80%;
+        z-index: 2;
+        transform: translate(-250%, -50%);
+        opacity: 1;
+
+        &.in {
+            transition: 0.3s;
+            transform: translate(-50%, -50%);
+        }
+
+        .part:before {
+            box-shadow: 0 0 10px red;
+        }
+
+        &.attack .part:before {
+            transition: box-shadow 8s;
+            box-shadow: 0 0 10px 10px red;
+        }
+
+        &.d1 {
+            background: rgba(234, 4, 255, 0.582);
+        }
+
+        &.d2 {
+            background: rgba(234, 4, 255, 0.582);
+            border-color: green;
+            border-width: 10px;
+        }
+
+        &.d1 .part-2,
+        &.d2 .part-3,
+        &.d3 {
+            display: none;
+        }
+    }
+
+    .laser-scrim {
+        background: red;
+        opacity: 1;
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 500;
+        opacity: 0;
+
+        &.fire {
+            transition: opacity 0.3s;
+            opacity: 1;
+        }
     }
 }
 
@@ -122,10 +184,14 @@
 
 .alien-2 {
     position: absolute;
-    top: 55%;
+    top: 60%;
     left: 50%;
-    height: 50%;
-    aspect-ratio: 1/2;
+    /*height: 50%;*/
+    /*aspect-ratio: 1/2;*/
+    height: 8vw;
+    width: 4vw;
+    max-height: 105px;
+    max-width: 57px;
     transform: translate(-650%, -50%);
 
     &:before {
@@ -136,8 +202,9 @@
         top: -2%;
         left: 50%;
         width: 150%;
-        aspect-ratio: 1/1;
-        transform: translate(-50%, 0);
+        padding-bottom: 150%;
+        /*aspect-ratio: 1/1;*/
+        transform: translate(-50%, -10%);
         border-radius: 100%;
         opacity: 0.4;
     }
@@ -152,7 +219,8 @@
         top: 50%;
         left: 50%;
         width: 300%;
-        aspect-ratio: 1/0.3;
+        padding-bottom: 85%;
+        /*aspect-ratio: 1/0.3;*/
         transform: translate(-50%, -50%);
         z-index: 10;
     }
@@ -165,7 +233,8 @@
         top: 1%;
         left: 50%;
         width: 100%;
-        aspect-ratio: 1/1;
+        padding-bottom: 100%;
+        /*aspect-ratio: 1/1;*/
         transform: translate(-50%, 0);
         border-radius: 100%;
         z-index: -11;
@@ -175,7 +244,8 @@
         background: #fff;
         border-radius: 100%;
         width: 20%;
-        aspect-ratio: 1/1;
+        padding-bottom: 20%;
+        /*aspect-ratio: 1/1;*/
         position: absolute;
         left: 50%;
         top: 15%;

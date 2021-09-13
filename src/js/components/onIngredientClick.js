@@ -1,14 +1,16 @@
 function onIngredientClick(event) {
   if (this.liquidLevel > 3) return;
+  if (!this.canClick) return;
 
   const elIngredient = event.target;
-  const color = this.ingredientColors[Number(elIngredient.dataset.id)];
+  const id = Number(elIngredient.dataset.id);
+  const color = this.ingredientColors[id];
 
   console.log('elIngredient', elIngredient.className, color);
 
   elIngredient.style.backgroundColor = color;
 
-  this.sounds.buttonPress();
+  this.sounds.buttonPress(100 * id);
 
   setTimeout(() => {
     elIngredient.style.backgroundColor = null;

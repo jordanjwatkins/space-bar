@@ -1,10 +1,9 @@
-const allOrders = [
+/*const allOrders = [
   { text: 'ቈ', ingredients: [0] },
   { text: 'ᎋ', ingredients: [1] },
   { text: 'ⶀ', ingredients: [2] },
   { text: 'ዒ', ingredients: [3] },
 
-  /* Basic Fizzes */
   // Switch to requiring exact count of required ingredients (instead of simple presence)?
   { text: 'ቈቈቈ', ingredients: [0, 0, 0] },
   { text: 'ᎋᎋᎋ', ingredients: [1, 1, 1] },
@@ -64,13 +63,13 @@ const orders =  [
   //{ text: 'ቈ۞ዒ', ingredients: [0, 3, 4] }, // mix buffer (only forces  with non-mix exploders)
   //{ text: '۞ⶀ', ingredients: [4, 2] }, // buffer (only 0) or explode
 
-  /*{ text: '۞ዒ', ingredients: [4, 3] }, // buffer or explode
+  { text: '۞ዒ', ingredients: [4, 3] }, // buffer or explode
   { text: 'ঊቈ', ingredients: [5, 0] }, // buffer or explode
   { text: 'ঊᎋ', ingredients: [5, 1] }, // buffer or explode
   { text: 'ঊቈⶀ', ingredients: [5, 0, 2] }, // explode risk
   { text: 'ঊᎋዒ', ingredients: [5, 1, 3] }, // explode risk
   { text: '۞ቈⶀ', ingredients: [4, 0, 2] }, // explode risk
-  { text: '۞ᎋዒ', ingredients: [4, 1, 3] }, // explode risk*/
+  { text: '۞ᎋዒ', ingredients: [4, 1, 3] }, // explode risk
 
   // V3
   //{ text: 'ᎋቈ۞', ingredients: [0, 1, 4] } // middle buffer (or fizz) (harder with non-mix exploders)
@@ -82,9 +81,9 @@ const orders =  [
   //{ text: '۞ঊ', ingredients: [4, 5] }, // make exploder and then defuse via mix (optionally) / otherwise only with 1 never touching 4 & 2 never touching 5)
 
 
-].sort(() => 0.5 - Math.random());
+].sort(() => 0.5 - Math.random());*/
 
-export default orders;
+//export default orders;
 
 export const level1 = [
   { text: 'ቈ', ingredients: [0] },
@@ -95,4 +94,31 @@ export const level1 = [
   { text: 'ঊ', ingredients: [5] },
   { text: 'ቈⶀ', ingredients: [0, 2] },
   { text: 'ᎋዒ', ingredients: [1, 3] }
+];
+
+export const level2 = [
+  { text: 'ቈቈ', ingredients: [0, 0] }, // needs safe buffer
+  { text: 'ᎋᎋ', ingredients: [1, 1] }, // needs safe buffer
+  { text: '۞ঊ', ingredients: [4, 5] }, // explode risk
+  { text: 'ቈⶀ', ingredients: [0, 2] }, // safe
+  { text: 'ᎋዒ', ingredients: [1, 3] }, // safe
+  { text: '۞ⶀ', ingredients: [4, 2] }, // buffer (only 0) or explode
+  { text: 'ঊቈ', ingredients: [5, 0] }, // buffer (only 2) or explode
+];
+
+export const level3 = [
+  { text: '۞ⶀ', ingredients: [4, 2] }, // explode
+  { text: '۞ዒ', ingredients: [4, 3] }, // explode?
+  { text: '۞ቈⶀ', ingredients: [4, 0, 2] }, // explode risk
+  { text: '۞ᎋዒ', ingredients: [4, 1, 3] }, // explode risk
+  { text: 'ቈዒ', ingredients: [0, 3] }, // impossible? no - 0 2 2 3
+  { text: 'ᎋⶀ', ingredients: [1, 2] }, // impossible? no - 2 0 1 1
+  { text: 'ቈ۞ዒ', ingredients: [0, 3, 4] }, // mix buffer (only forced with non-mix exploders)
+  { text: 'ቈ۞ዒ', ingredients: [0, 3, 4] }, // mix buffer (only forced with non-mix exploders)
+  { text: 'ᎋঊⶀ', ingredients: [1, 2, 5] }, // mix buffer (only forced with non-mix exploders)
+];
+
+export const level4 = [
+  ...level2,
+  ...level3
 ];

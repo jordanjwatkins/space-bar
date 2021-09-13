@@ -6,7 +6,7 @@ if (window.AudioContext) {
   audioContext = new window.AudioContext();
 }
 
-const semitoneMap = {
+/*const semitoneMap = {
   C: 3,
   D: 5,
   E: 7,
@@ -14,7 +14,7 @@ const semitoneMap = {
   G: 10,
   A: 12,
   B: 14
-};
+};*/
 
 function isAudioApiSupported() {
   return !!audioContext;
@@ -33,7 +33,7 @@ if (isAudioApiSupported()) {
   globalGainNode.gain.value = 0.3;
 }
 
-function playNote(note, options) {
+/*function playNote(note, options) {
   if (!isAudioApiSupported()) return;
 
   const config = options || {};
@@ -105,7 +105,7 @@ function calculateNoteFrequency(note) {
 
 function frequencyByOffset(baseFrequency, semitoneOffset) {
   return baseFrequency * Math.pow(2, (semitoneOffset / 12));
-}
+}*/
 /*
 function noteRange(firstNote, count, accidentals) {
   const notes = [];
@@ -199,7 +199,7 @@ function prevNote(note, accidentals) {
   }
 } */
 
-function toInt(value) {
+/*function toInt(value) {
   return parseInt(value, 10);
 }
 
@@ -251,7 +251,7 @@ const brownNoiseNode = (() => {
   };
 
   return node;
-})();
+})();*/
 
 const createBrownNoiseNode = () => {
   if (!isAudioApiSupported()) return;
@@ -357,7 +357,6 @@ class SimpleReverb {
   }
 
   renderTail() {
-    console.log('renderTail');
     const tailContext = new OfflineAudioContext(2, this.context.sampleRate * this.reverbTime, this.context.sampleRate);
 
     tailContext.oncomplete = (buffer) => {
@@ -389,9 +388,15 @@ class SimpleReverb {
   }
 }
 
-const verb = new SimpleReverb(audioContext);
+let verb;
 
-verb.setup();
+try {
+  verb = new SimpleReverb(audioContext);
+
+  verb.setup();
+} catch (error) {
+
+}
 
 
 function randomSlide(startF, endF, duration, gain, waveType) {
@@ -415,7 +420,7 @@ function randomSlide(startF, endF, duration, gain, waveType) {
   oscillator.frequency.linearRampToValueAtTime(endFrequency, stopTime); // value in hertz
 
   // oscillator.connect(gainNode)
-  if (oscillator.type === 'sine') {
+  if (oscillator.type === 'sine' && verb) {
     verb.setup2(oscillator, gainNode);
   } else {
     oscillator.connect(gainNode);
@@ -449,15 +454,15 @@ function randomSlide(startF, endF, duration, gain, waveType) {
 
 export default {
   audioContext,
-  playNote,
+  //playNote,
   // noteRange,
   // noteNameRange,
-  makeNote,
+  //makeNote,
   // nextNote,
   // prevNote,
-  playSequenceNote,
-  songNote,
-  songNoise,
+ // playSequenceNote,
+ // songNote,
+  //songNoise,
   randomSlide,
   brownNoise
 };

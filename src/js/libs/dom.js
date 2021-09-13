@@ -1,6 +1,6 @@
-function domReady(init) {
+/*function domReady(init) {
   document.addEventListener('DOMContentLoaded', init);
-}
+}*/
 
 function find(selector, queryRoot) {
   queryRoot = queryRoot || document;
@@ -14,9 +14,9 @@ function findOne(selector, queryRoot) {
   return queryRoot.querySelectorAll(selector)[0];
 }
 
-function findId(selector) {
+/*function findId(selector) {
   return document.getElementById(selector);
-}
+}*/
 
 function each(items, callback) {
   if (items[0]) {
@@ -42,11 +42,11 @@ function off(els, event, callback) {
   });
 }
 
-function inArray(value, array) {
+/*function inArray(value, array) {
   return [].indexOf.call(array, value) > -1;
-}
+}*/
 
-function onTap(els, callback, options) {
+function onTap(els, callback, options = {}) {
   let touched = false;
   const tapCallback = handleTap();
 
@@ -57,6 +57,8 @@ function onTap(els, callback, options) {
 
   function handleTap() {
     return (event) => {
+      if (options.once) offTap(els, tapCallback);
+
       // prevent click event event if triggering event was touchstart
       if (event.type === 'touchstart') {
         event.preventDefault();
@@ -76,7 +78,7 @@ function offTap(els, callback) {
   off(els, 'touchstart', callback);
 }
 
-function fragment(htmlString) {
+/*function fragment(htmlString) {
   const aFragment = document.createDocumentFragment();
 
   if (htmlString) {
@@ -84,7 +86,7 @@ function fragment(htmlString) {
   }
 
   return aFragment;
-}
+}*/
 
 function make(htmlString) {
   const div = document.createElement('div');
@@ -96,13 +98,13 @@ function make(htmlString) {
   return div.childNodes[0];
 }
 
-function css(els, styles) {
+/*function css(els, styles) {
   each(els, (el) => {
     Object.keys(styles).forEach((property) => {
       el.style[property] = styles[property];
     });
   });
-}
+}*/
 
 export default {
   //ready: domReady,
@@ -116,6 +118,6 @@ export default {
   onTap,
   //offTap,
   //fragment,
-  make,
+  make
   //css
 };
